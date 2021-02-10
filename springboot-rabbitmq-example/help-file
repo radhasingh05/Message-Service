@@ -1,0 +1,19 @@
+run the application
+
+http://localhost:9090/order/A2B
+
+{
+    "name":"Adarsh Singh",
+    "qty" :4,
+    "price" : 100
+}
+
+
+and check the rabbit console
+http://192.168.0.101:15672/#/
+or
+http://localhost:15672/#/
+guest/guest
+
+check the queue
+and console logs

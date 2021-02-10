@@ -1,0 +1,42 @@
+Installing Kafka with Docker
+
+	Create a docker-compose.yml file
+		touch docker-compose.yaml
+
+version: "3"
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+    - 2181:2181
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+    - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+Start the Service
+	You can start the service in foreground mode using
+		docker-compose -f docker-compose.yml up
+	If you want to start the service in background mode then you can use the below command
+		docker-compose -f docker-compose.yml up -d
+
+To go inside the docker
+
+docker exec -it Kafka /bin/sh
+	go inside > /opt/kafka/bin
+	> ./kafka-topic.sh --create —zookeeper zookeeper:2181 —replication-factor 1 —partitions 1 —topic Kafka_Example
+
+	/opt/kafka_2.13-2.7.0/bin #
+                        ./kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic Kafka_Example
+			./kafka-console-consumer.sh —bootstrap-server localhost:9092 —topic Kafka_Example —from-beginning
+
+
+hit the
+http://localhost:9090/kafka/publish/Hello
+and check the kafka consumer console
